@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Float, Integer, String, ARRAY
-
 from persistance.db_connection.db_connector import Base
 
 

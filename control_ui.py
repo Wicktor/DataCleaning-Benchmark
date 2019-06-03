@@ -1,21 +1,25 @@
-import inner_wear.transfer as tf
-import persistance.db_operator as db_operator
-from inner_wear.db_model.Cloth import Cloth
-import visualization.visualizer as vis
-import inner_wear.custom_cleaning as c_cleaning
 import sys
+
+import cleaning.custom_cleaning as c_cleaning
+import persistance.db_operator as db_operator
+import util.transfer as tf
+import visualization.visualizer as vis
+from db_model.inner_wear.Cloth import Cloth
+
 
 # TODO: Replace/supplement with terminal commands
 
 def add_data_set():
     csv_path = input('path to csv file: ')
-    tf.transfer_csv_cloth_to_db(csv_path, 'DB_INNERWEAR_ORG')
+    target_database = input('target db config section: ')
+    tf.transfer_csv_cloth_to_db(csv_path, target_database)
     print('The file ' + csv_path + 'was added to database DB_INNERWEAR_ORG')
     start()
 
 def show_bar_chart_summary():
-    db_name = input('DB config section: ')
-    cloths = db_operator.db_get_all_entrys_of(db_name, Cloth)
+    db_section = input('DB config section: ')
+    table_name = input('Name of the table: ')
+    cloths = db_operator.db_get_all_entrys_of(db_section, table_name)
     vis.bar_chart_summary(cloths)
     start()
 
@@ -32,6 +36,10 @@ def manual_data_unification():
     replacment_string = input('replacment string: ')
     c_cleaning.clean_column_string_values(source_db, Cloth, search_column, search_query, replacment_string)
     start()
+
+# TODO: delete this function, only for testing
+def get_by_id(id, db_name, table_name):
+    db_operator.db_get_by_id_v2(id, db_name, table_name)
 
 ###############################################
 #           start of program                  #
@@ -60,3 +68,4 @@ def start():
 
     start()
 start()
+

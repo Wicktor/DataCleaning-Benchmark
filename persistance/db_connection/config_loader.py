@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 
 
-def config(section, filename='./config/config.ini'):
+def config(section, filename='../config/config.ini'):
     '''
     Reads config file to get informations needed to db_connect to postgres
     :param filename: location of the config file
@@ -21,5 +21,4 @@ def config(section, filename='./config/config.ini'):
             db[param[0]] = param[1]
     else:
         raise Exception('Section {0} not found in the {1} file'.format(section, filename))
-
     return db
