@@ -1,7 +1,7 @@
 import persistance.db_operator as db_op
 
 def clean_column_string_values(db_config_section, mapped_class, column_name:str, search_substring, replacement_string):
-    cloths = db_op.db_get_all_entrys_of(db_config_section, mapped_class)
+    cloths = db_op.db_get_all_entrys_of_table(db_config_section, mapped_class)
     cloths_to_save = []
     for cloth in cloths:
         try:
